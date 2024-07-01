@@ -12,15 +12,19 @@ Uni-Username: se223xv
 
 I will use raspberry pi pico with Adafruit SHT31-D Temperature & Humidity Sensor to show the temprature and humidity of a room.
 
-# Objective
-
 # Material
+
+• Raspberry pi pico
+
+• Adafruit SHT31-D Temperature & Humidity Sensor
+
 
 # Computer Setup
 
+I used Thonny to flash the Pi Pico.
+
 # Putting everything together
 
-# Platform
 
 # The code
 ```
@@ -99,8 +103,10 @@ while True:
 
 
 # Transmitting the data / connectivity
-I will create a HTTP server on the Pi Pico and read values from humidity sensor and then send that value inside an HTML file to the client that makes requests to the server.
+I will create a local HTTP server on the Pi Pico and read values from humidity sensor and then send that value inside an HTML file to the client that makes requests to the server.
 
 # Presenting the data
+
+I will use CSS to style the data inside the HTML file. I will also add javascript code so that the client will use short polling to continuosly get the current temprature and humidity of the room from the sensor connected to the Pi Pico.
 
 # Finalizing the design
