@@ -5,7 +5,7 @@
 
 # Overview
 I will use a Raspberry Pi Pico WH with Adafruit SHT31-D Temperature & Humidity Sensor to show the temprature and humidity of a room.
-Apart from buying the materials needed and the time it takes for the delivery and soldering the temprature pins that comes with the Adafruit sensor, this project will not take more than 30 minutes to assemble and program by following the description below.
+Apart from buying the materials needed and the time it takes for the delivery and soldering header strip pins that comes with the Adafruit sensor, this project will not take more than 30 minutes to assemble and program by following the description below.
 
 # Objective
 Sometimes while studying i feel a bit cold, specially during the winter because of the cold weather in Sweden and this disrupts my workflow/concentration. Most of those times i have come to realize that it has more to do with my eating routines rather than if the room is actually cold. The goal of this project is to make a device that i can just connect whenever i plan sit down to work for couple of hours. This device will repeadetly measure the temprature of the room so i can just click 2 buttons whenever needed on my laptop to get the measurments quickly so that i know for sure if i need to take break and go eat something or is it that the room is too cold and i have to turn on a heater or close the window.
