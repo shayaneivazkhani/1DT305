@@ -88,14 +88,16 @@ if url == '/':
 ```
 
 ## Transmitting the data / connectivity
-I will create a local HTTP server on the Pi Pico and read values from humidity sensor and then send that value inside an HTML file to the client that makes requests to the server.
+I created a local HTTP server on the Pi Pico and when the client connects to the via URL that is printed out in thonny, the Pi Pico will read values from humidity sensor and then replace that value with named placeholders (`TEMPERATURE_PLACEHOLDER`, `HUMIDITY_PLACEHOLDER`) inside the defined `html_template` and send that html to the client. The html have code that afterwards starts to update the html provided by itself with latest values from the sensor every 2 seconds. I choose 2 seconds because if i also wanted to connect my phone at the same time my laptops browser was connected to it, then one of the browsers would not be able to make requests because of the single threaded server would be busy with handling previous requests. This little adjustment made it possible to serve 2 clients that would both make continous requsts for updated measurments from the server almost at the same time without having to implement a asynchronous server request handler option. 
 
 ## Presenting the data
-I will use CSS to style the data inside the HTML file. I will also add javascript code so that the client will use short polling to continuosly get the current temprature and humidity of the room from the sensor connected to the Pi Pico.
+I used CSS inside `<style>` tag in the `html_template` to style the data/page that the client would see. I also added javascript code so that the client will use short polling to continuosly get the current temprature and humidity of the room from the sensor connected to the Pi Pico without having to refresh the web page.
 
 <img width="1489" alt="“›” 2024-07-02 at 04 39 10" src="https://github.com/shayaneivazkhani/1DT305/assets/105381967/466a5217-7ffa-432b-ae76-0a9a85cb44a2">
 
 # Summary
+This is how the physical part of the project will look:
 ![“›” 2024-07-02 at 06 29 10](https://github.com/shayaneivazkhani/1DT305/assets/105381967/26c887c0-4dd1-4c46-b840-2ffe18d73f32)
 
+#### Future improvements: add a OLED screen so that the dynamically assigned IP adress of the server would be available without the need for depending on Thonny and also connecting external power supply via 12V battery that cuts down to 5V via a voltage regulator so that the project would not need a laptop for functioning.
 
