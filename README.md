@@ -22,6 +22,8 @@ I bought the materials needed from [electrokit](https://www.electrokit.com)
 | 1 | Kopplingsdäck 170 anslutningar                                 | 35   |
 | 1 | Labbsladd 20-pin 15cm hane/hane                                | 29   |
 
+#### total cost: 408 SEK
+
 # Step 1 of 2: Putting everything together
 How all the electronics is connected, aside from the usb that connects the Raspberry Pi Pico to the computer: 
 ![“›” 2024-07-02 at 05 57 47](https://github.com/shayaneivazkhani/1DT305/assets/105381967/ede26b74-6c30-48c4-85a4-f14c98a7a5f3)
