@@ -9,7 +9,7 @@ i2c = I2C(0, scl=Pin(17), sda=Pin(16), freq=1000)
 # Sensor's I2C address
 sensor_address = 0x44
 
-# Command to start measurement (single shot mode, high repeatability)
+# Command to start measurement (Measurement commands in single shot mode, 0x2C0D –> Repeatability set to medium, ClockStretching set to enabled)
 measurement_command = bytearray([0x2C, 0x0D])
 
 def start_measurement():
