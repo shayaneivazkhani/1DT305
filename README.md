@@ -31,20 +31,21 @@ How all the electronics is connected, aside from the usb that connects the Raspb
 # Step 2 of 2: Computer setup and usage
 
 ### Setup and usage (beginner):
-Simplest guide to set up your computer whether you have Mac or Windows is by following this guide [Raspberry Pi Pico W LESSON 1: Write Your First Program for Absolute Beginners](https://www.youtube.com/watch?v=SL4_oU9t8Ss&list=PLGs0VKk2DiYz8js1SJog21cDhkBqyAhC5) and just replacing the code with what i have written in file `temperature_humidity_sensor.py` [here](https://github.com/shayaneivazkhani/1DT305/blob/main/temperature_humidity_sensor.py) and pressing the green START/PLAY button at the top left of the Thonny window. 
-
-<img width="799" alt="“›” 2024-07-02 at 08 17 50" src="https://github.com/shayaneivazkhani/1DT305/assets/105381967/5e1d05df-5f79-4fbb-a821-1cc32c6636d9">
-
-Then pressing the blue URL which will open your browser and take you to the webpage that the Raspberry Pi Pico provides.
-
-<img width="956" alt="“›” 2024-07-02 at 08 20 46" src="https://github.com/shayaneivazkhani/1DT305/assets/105381967/d9f0661a-75ea-49fd-850e-fd004b83a65f">
-
-
-But remember to provide your wifi credentials in lines 207–208 in file `temperature_humidity_sensor.py` [here](https://github.com/shayaneivazkhani/1DT305/blob/main/temperature_humidity_sensor.py)
+Simplest guide to set up your computer whether you have Mac or Windows is by following this guide [Raspberry Pi Pico W LESSON 1: Write Your First Program for Absolute Beginners](https://www.youtube.com/watch?v=SL4_oU9t8Ss&list=PLGs0VKk2DiYz8js1SJog21cDhkBqyAhC5) and just replacing the code with what i have written in file `temperature_humidity_sensor.py` [here.](https://github.com/shayaneivazkhani/1DT305/blob/main/temperature_humidity_sensor.py)
+But remember to provide your wifi credentials (very important!) in lines 207–208 in file `temperature_humidity_sensor.py` [here](https://github.com/shayaneivazkhani/1DT305/blob/main/temperature_humidity_sensor.py)
 ```
 ssid = 'Wifi-name'
 password = 'Wifi-password'
 ```
+
+Then all you have to do is to press the green START/PLAY button at the top left of the Thonny window. 
+
+<img width="799" alt="“›” 2024-07-02 at 08 17 50" src="https://github.com/shayaneivazkhani/1DT305/assets/105381967/5e1d05df-5f79-4fbb-a821-1cc32c6636d9">
+
+After pressing the START/PLAY button if you look at the bottom of the Thonny window, a blue URL will be printed if your wifi credentials is correct, and pressing the blue URL  will open your browser and take you to the webpage that the Raspberry Pi Pico provides and updates with values from the temprature sensor.
+
+<img width="956" alt="“›” 2024-07-02 at 08 20 46" src="https://github.com/shayaneivazkhani/1DT305/assets/105381967/d9f0661a-75ea-49fd-850e-fd004b83a65f">
+
 
 ### Setup (experienced):
 I used Thonny to flash the Pi Pico. Just provide your wifi credentials in lines 207–208.
