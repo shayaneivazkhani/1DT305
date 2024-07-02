@@ -63,7 +63,7 @@ def process_measurement(data):
     return humidity, temperature
 ```
 
-And most important part of creating the server was to differentiate the HTTP start line to decide if the client only wants the page (GET / HTTP/1.1) or just the latest measurment from the sensor (GET 'update' HTTP/1.1).
+And most important part of creating the server was to differentiate the HTTP start line to decide if the client only wants the page (GET / HTTP/1.1) or just the latest measurment from the sensor (GET '/update' HTTP/1.1).
 #### lines 253–271 in temperature_humidity_sensor.py
 ```
 if url == '/':
