@@ -4,7 +4,7 @@
 ##### Uni-Username: se223xv
 
 # Overview
-I will use raspberry pi pico with Adafruit SHT31-D Temperature & Humidity Sensor to show the temprature and humidity of a room.
+I will use a Raspberry Pi Pico WH with Adafruit SHT31-D Temperature & Humidity Sensor to show the temprature and humidity of a room.
 Apart from buying the materials needed and the time it takes for the delivery and soldering the temprature pins that comes with the Adafruit sensor, this project will not take more than 30 minutes to assemble and program by following the description below.
 
 # Objective
