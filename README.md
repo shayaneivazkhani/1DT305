@@ -1,10 +1,7 @@
-Course: 1DT305 – Tillämpad Internet of Things, introduktion ST24, Linnæus University
-
-Assignment: mandatory public project repo 
-
-By: Shayan Eivaz Khani
-
-Uni-Username: se223xv
+##### Course: 1DT305 – Tillämpad Internet of Things, introduktion ST24, Linnæus University
+##### Assignment: mandatory public project repo 
+##### By: Shayan Eivaz Khani
+##### Uni-Username: se223xv
 
 # Overview
 I will use raspberry pi pico with Adafruit SHT31-D Temperature & Humidity Sensor to show the temprature and humidity of a room.
@@ -49,3 +46,6 @@ I will use CSS to style the data inside the HTML file. I will also add javascrip
 <img width="1489" alt="“›” 2024-07-02 at 04 39 10" src="https://github.com/shayaneivazkhani/1DT305/assets/105381967/466a5217-7ffa-432b-ae76-0a9a85cb44a2">
 
 # Summary
+![“›” 2024-07-02 at 06 29 10](https://github.com/shayaneivazkhani/1DT305/assets/105381967/26c887c0-4dd1-4c46-b840-2ffe18d73f32)
+
+
