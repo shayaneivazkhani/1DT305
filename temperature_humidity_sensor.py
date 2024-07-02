@@ -212,7 +212,7 @@ wlan.active(True)
 wlan.connect(ssid, password)
 
 # Wait for connect or fail
-max_wait = 10
+max_wait = 20
 while max_wait > 0:
     if wlan.status() < 0 or wlan.status() >= 3:
         break
