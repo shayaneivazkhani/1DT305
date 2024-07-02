@@ -99,5 +99,6 @@ I used CSS inside `<style>` tag in the `html_template` to style the data/page th
 This is how the physical part of the project will look:
 ![“›” 2024-07-02 at 06 29 10](https://github.com/shayaneivazkhani/1DT305/assets/105381967/26c887c0-4dd1-4c46-b840-2ffe18d73f32)
 
-#### Future improvements: add a OLED screen so that the dynamically assigned IP adress of the server would be available without the need for depending on Thonny and also connecting external power supply via 12V battery that cuts down to 5V via a voltage regulator so that the project would not need a laptop for functioning.
+#### Future improvements: 
+Adding a OLED screen so that the dynamically assigned IP adress of the server would be available without the need for depending on Thonny and also connecting external power supply via 12V battery that cuts down to 5V via a voltage regulator so that the project would not need a laptop for functioning.
 
