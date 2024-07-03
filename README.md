@@ -86,7 +86,7 @@ def process_measurement(data):
     return humidity, temperature
 ```
 
-And most important part of creating the server was to differentiate the HTTP start line to decide if the client only wants the page (GET / HTTP/1.1) or just the latest measurment from the sensor (GET '/update' HTTP/1.1).
+And most important part of creating the server was to differentiate the HTTP start line to decide if the client only wants the page (GET / HTTP/1.1) or just the latest measurment from the sensor (GET /update HTTP/1.1).
 #### lines 253–271 in temperature_humidity_sensor.py
 ```
 if url == '/':
@@ -112,14 +112,13 @@ if url == '/':
 
 ## Transmitting the data / connectivity 
 
-Data that is measured from the sensor is placed inside a `html_template` and is transmitted to the client over the Wi-Fi network using TCP/IP. The Pi Pico is set up as a web server, listening for HTTP requests on port 80 and responding with HTML content or plain text based on the type of incoming request. The `html_template` contains code that will update the temperature and humidiy values by making automatic requests to the server every 0,5 seconds. I choose to connect the Pi Pico to the wifi because this device will be in my room when it's used, and my room has a Wifi router that is allways turned on.
+Data that is measured from the sensor is placed inside a `html_template` and is transmitted to the client over the Wi-Fi network over TCP/IP. The Pi Pico is set up as a web server, listening for HTTP requests on port 80 and responding with HTML content or plain text based on the type of incoming request. The `html_template` contains code that will update the temperature and humidiy values by making automatic requests to the server every 0,5 seconds. I choose to connect the Pi Pico to the wifi because this device will be in my room when it's used, and my room has a Wifi router that is allways turned on.
 
 I set up the HTTP server based on page 21 of the Raspberry Pi Pico's [documentation](https://datasheets.raspberrypi.com/picow/connecting-to-the-internet-with-pico-w.pdf?_gl=1*q9tyvf*_ga*MTc4NTg2NTY3Mi4xNzIwMDIxMDI2*_ga_22FD70LWDS*MTcyMDAzMDAzMy4yLjEuMTcyMDAzMDA1NC4wLjAuMA..) found [here](https://www.raspberrypi.com/documentation/microcontrollers/micropython.html) 
 
 
 Most imortant part of setting up the server is following:
-
-#### Initializing and configuring a WLAN Interface on the Raspberry Pi Pico W (enabling the Wi-Fi capabilities) then start to connect to the wifi router.
+#### Initializing and configuring a WLAN Interface (WiFi Interface) on the Raspberry Pi Pico W, i.e. enabling the Wi-Fi capabilities of the hardware, then start to connect to the wifi router (the access point).
 ##### lines 210–212
 ```
 wlan = network.WLAN(network.STA_IF) ––> Creates a WLAN object that we can use to control and manage Wi-Fi connections (a WLAN interface) This object is an instance of the WLAN class, which provides various methods to control and interact with the Wi-Fi hardware.. network.STA_IF: parameter then configures the WLAN interface to operate in "Station" mode. Configuringthe WLAN as a station means the device will act as a client that connects to an existing wireless network (similar to how a smartphone or laptop connects to a Wi-Fi network). This is opposed to "Access Point" mode, where the device would create its own Wi-Fi network for other devices to connect to.
@@ -138,9 +137,9 @@ s.listen(1)                                      ––>  Puts the socket into l
 
 ###### * :
 ###### * :
-###### * socket.getaddrinfo('0.0.0.0', 80): This returns a list of tuples. it returns a list of tuples containing address information. Each tuple includes details such as the address family, socket type, protocol number, and the socket address (IP address and port). 
+###### * socket.getaddrinfo('0.0.0.0', 80): This returns a list of tuples each containing information details such as the socket address (IP address and port) etc. in a format that is needed to create and bind a socket. 
 ###### * socket.getaddrinfo: a function in Python's socket module that translates a host name and port number into an address family, socket type, and protocol number. Essentially, it helps in converting human-readable domain names or IP addresses into a format that can be used by the network functions to establish a connection.
-###### * 0.0.0.0: This IP address is a special address used to bind the socket to all available network interfaces on the device. This means that the server will accept incoming connections on any of the network interfaces the device has (e.g., Wi-Fi, Ethernet if available). This IP address tells the system to bind the socket to all available network interfaces. This means the server will listen for incoming connections on any IP address assigned to the machine (e.g. 192.168.1.5 on Wi-Fi, another number on Ethernet, etc.).
+###### * 0.0.0.0: This IP address is a special address used to bind the socket to all available network interfaces on the device. When a server binds to '0.0.0.0', it means that it will accept connections on any of the machine's IP addresses. This is useful when the machine has multiple network interfaces (e.g., Ethernet, Wi-Fi) and you want the server to be accessible regardless of which interface the request comes through. This means that the server will accept incoming connections on any of the network interfaces the device has (e.g., Wi-Fi, Ethernet if available). This IP address tells the system to bind the socket to all available network interfaces. This means the server will listen for incoming connections on any IP address assigned to the machine (e.g. 192.168.1.5 on Wi-Fi, another number on Ethernet, etc.).
 
 ###### * 80: This is the default port for HTTP traffic. By specifying port 80, the server is set up to handle HTTP requests, which is typical for a web server.
 ###### * [0][-1]: The use of negative indexing in Python, such as -1 in [0][-1], is a feature that allows accessing elements from the end of a list. Here we choose the last element ,[-1], of the first tupöe
