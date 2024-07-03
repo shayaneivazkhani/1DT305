@@ -110,11 +110,36 @@ if url == '/':
                 '{}'.format(len(response_data), response_data)
 ```
 
-## Transmitting the data / connectivity and the platform
-I did not use any external platform for creating the UI and connecting it to the data recieved by the Pi Pico. I created a local HTTP server on the Pi Pico and when the client connects to it via the URL that is printed out in thonny, the Pi Pico will read values from humidity sensor and then replace that value with named placeholders (`TEMPERATURE_PLACEHOLDER`, `HUMIDITY_PLACEHOLDER`) inside the defined `html_template` and send that html to the client. The html have code that afterwards starts to update itself with latest values from the sensor every 2 seconds. I choose 2 seconds because if i also wanted to connect my phone at the same time my laptops browser was connected to it, then one of the browsers would not be able to make requests because of the single threaded server would be busy with handling previous requests. This little adjustment made it possible to serve 2 clients that would both make continous requsts for updated measurments from the server almost at the same time without having to implement a asynchronous server request handler option. 
+## Transmitting the data / connectivity 
 
-## Presenting the data
-I used CSS inside `<style>` tag in the `html_template` to style the data/page that the client would see. I also added javascript code so that the client will use short polling to continuosly get the current temprature and humidity of the room from the sensor connected to the Pi Pico without having to refresh the web page. No database is needed because the webpage always shows the latest measurement data.
+Data that is measured from the sensor is placed inside a `html_template` and is transmitted to the client over the Wi-Fi network using TCP/IP. The Pi Pico is set up as a web server, listening for HTTP requests on port 80 and responding with HTML content or plain text based on type of incoming request. I choose to connect the Pi Pico to the wifi because this device will be in my room when it's used, and my room has a Wifi router that is allways turned on.
+
+I set up the HTTP server based on page 21 of the Raspberry Pi Pico's [documentation](https://datasheets.raspberrypi.com/picow/connecting-to-the-internet-with-pico-w.pdf?_gl=1*q9tyvf*_ga*MTc4NTg2NTY3Mi4xNzIwMDIxMDI2*_ga_22FD70LWDS*MTcyMDAzMDAzMy4yLjEuMTcyMDAzMDA1NC4wLjAuMA..) found [here](https://www.raspberrypi.com/documentation/microcontrollers/micropython.html) 
+
+
+
+
+##### lines 210–212
+```
+wlan = network.WLAN(network.STA_IF) ––> Creates a WLAN object that we can use to control and manage Wi-Fi connections (a WLAN interface). network.STA_IF: parameter then configures the WLAN interface to operate in "Station" mode. Configuringthe WLAN as a station means the device will act as a client that connects to an existing wireless network (similar to how a smartphone or laptop connects to a Wi-Fi network). This is opposed to "Access Point" mode, where the device would create its own Wi-Fi network for other devices to connect to.
+wlan.active(True)                   ––> powers on the WLAN hardware (Wifi hardware) necessary start searching for and connecting to Wi-Fi networks.
+wlan.connect(ssid, password)        ––> Begins to connect to the specified Wi-Fi network using the provided SSID and password.
+```
+
+
+##### lines 232–235
+```
+addr = socket.getaddrinfo('0.0.0.0', 80)[0][-1]  ––> 
+s = socket.socket()                              ––> Creates a new socket object. A socket is an endpoint for sending and receiving data across a network. It allows communication between devices over the network.
+s.bind(addr)                                     ––> Binds the socket to an address, i.e. assigning a specific IP address and port number to the socket allowing it to listen for incoming HTTP connections for incoming connections on that adress.
+s.listen(1)                                      ––>  Puts the socket into listening mode, waiting for incoming connection requests. The parameter specifies the maximum number of queued connections. In this case, it allows only one connection to be queued while the server is busy handling the current connection.
+```
+
+
+
+## Presenting the data and the platform
+
+I did not use any external platform for creating the UI and connecting it to the data recieved by the Pi Pico. I used CSS inside `<style>` tag in the `html_template` that is sent to the client when it makes a request by opening the URL that is printed out in Thonny, to style the data/page that the client would see. I also added javascript in code in the `html_template` so that the client's browser will use short polling to continuosly get the current temprature and humidity of the room from the sensor connected to the Pi Pico without having to refresh the web page. No database is needed because the webpage always shows the latest measurement data.
 
 <img width="1489" alt="“›” 2024-07-02 at 04 39 10" src="https://github.com/shayaneivazkhani/1DT305/assets/105381967/466a5217-7ffa-432b-ae76-0a9a85cb44a2">
 
