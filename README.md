@@ -112,30 +112,38 @@ if url == '/':
 
 ## Transmitting the data / connectivity 
 
-Data that is measured from the sensor is placed inside a `html_template` and is transmitted to the client over the Wi-Fi network using TCP/IP. The Pi Pico is set up as a web server, listening for HTTP requests on port 80 and responding with HTML content or plain text based on type of incoming request. I choose to connect the Pi Pico to the wifi because this device will be in my room when it's used, and my room has a Wifi router that is allways turned on.
+Data that is measured from the sensor is placed inside a `html_template` and is transmitted to the client over the Wi-Fi network using TCP/IP. The Pi Pico is set up as a web server, listening for HTTP requests on port 80 and responding with HTML content or plain text based on the type of incoming request. The `html_template` contains code that will update the temperature and humidiy values by making automatic requests to the server every 0,5 seconds. I choose to connect the Pi Pico to the wifi because this device will be in my room when it's used, and my room has a Wifi router that is allways turned on.
 
 I set up the HTTP server based on page 21 of the Raspberry Pi Pico's [documentation](https://datasheets.raspberrypi.com/picow/connecting-to-the-internet-with-pico-w.pdf?_gl=1*q9tyvf*_ga*MTc4NTg2NTY3Mi4xNzIwMDIxMDI2*_ga_22FD70LWDS*MTcyMDAzMDAzMy4yLjEuMTcyMDAzMDA1NC4wLjAuMA..) found [here](https://www.raspberrypi.com/documentation/microcontrollers/micropython.html) 
 
 
+Most imortant part of setting up the server is following:
 
-
+#### Initializing and configuring a WLAN Interface on the Raspberry Pi Pico W (enabling the Wi-Fi capabilities) then start to connect to the wifi router.
 ##### lines 210–212
 ```
-wlan = network.WLAN(network.STA_IF) ––> Creates a WLAN object that we can use to control and manage Wi-Fi connections (a WLAN interface). network.STA_IF: parameter then configures the WLAN interface to operate in "Station" mode. Configuringthe WLAN as a station means the device will act as a client that connects to an existing wireless network (similar to how a smartphone or laptop connects to a Wi-Fi network). This is opposed to "Access Point" mode, where the device would create its own Wi-Fi network for other devices to connect to.
-wlan.active(True)                   ––> powers on the WLAN hardware (Wifi hardware) necessary start searching for and connecting to Wi-Fi networks.
-wlan.connect(ssid, password)        ––> Begins to connect to the specified Wi-Fi network using the provided SSID and password.
+wlan = network.WLAN(network.STA_IF) ––> Creates a WLAN object that we can use to control and manage Wi-Fi connections (a WLAN interface) This object is an instance of the WLAN class, which provides various methods to control and interact with the Wi-Fi hardware.. network.STA_IF: parameter then configures the WLAN interface to operate in "Station" mode. Configuringthe WLAN as a station means the device will act as a client that connects to an existing wireless network (similar to how a smartphone or laptop connects to a Wi-Fi network). This is opposed to "Access Point" mode, where the device would create its own Wi-Fi network for other devices to connect to.
+wlan.active(True)                   ––> powers on the WLAN hardware (Wifi hardware) which is necessary for starting searching for and connecting to Wi-Fi networks.
+wlan.connect(ssid, password)        ––> Begins to connect to the specified Wi-Fi network using the provided SSID (network name) and password.
 ```
 
-
+#### Create a Socket object to accept HTTP requests on port 80 from any network interface on the Raspberry Pi Pico WH
 ##### lines 232–235
 ```
-addr = socket.getaddrinfo('0.0.0.0', 80)[0][-1]  ––> 
-s = socket.socket()                              ––> Creates a new socket object. A socket is an endpoint for sending and receiving data across a network. It allows communication between devices over the network.
+addr = socket.getaddrinfo('0.0.0.0', 80)[0][-1]  ––> *
+s = socket.socket()                              ––> Creates a new socket object. A socket is an TCP/IP endpoint for sending and receiving data across a network. It allows communication between devices over the network.
 s.bind(addr)                                     ––> Binds the socket to an address, i.e. assigning a specific IP address and port number to the socket allowing it to listen for incoming HTTP connections for incoming connections on that adress.
 s.listen(1)                                      ––>  Puts the socket into listening mode, waiting for incoming connection requests. The parameter specifies the maximum number of queued connections. In this case, it allows only one connection to be queued while the server is busy handling the current connection.
 ```
 
+###### * :
+###### * :
+###### * socket.getaddrinfo('0.0.0.0', 80): This returns a list of tuples. it returns a list of tuples containing address information. Each tuple includes details such as the address family, socket type, protocol number, and the socket address (IP address and port). 
+###### * socket.getaddrinfo: a function in Python's socket module that translates a host name and port number into an address family, socket type, and protocol number. Essentially, it helps in converting human-readable domain names or IP addresses into a format that can be used by the network functions to establish a connection.
+###### * 0.0.0.0: This IP address is a special address used to bind the socket to all available network interfaces on the device. This means that the server will accept incoming connections on any of the network interfaces the device has (e.g., Wi-Fi, Ethernet if available). This IP address tells the system to bind the socket to all available network interfaces. This means the server will listen for incoming connections on any IP address assigned to the machine (e.g. 192.168.1.5 on Wi-Fi, another number on Ethernet, etc.).
 
+###### * 80: This is the default port for HTTP traffic. By specifying port 80, the server is set up to handle HTTP requests, which is typical for a web server.
+###### * [0][-1]: The use of negative indexing in Python, such as -1 in [0][-1], is a feature that allows accessing elements from the end of a list. Here we choose the last element ,[-1], of the first tupöe
 
 ## Presenting the data and the platform
 
