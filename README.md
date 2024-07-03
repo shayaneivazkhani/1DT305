@@ -138,7 +138,7 @@ s.listen(1)                                      ––>  Puts the socket into l
 ###### * socket.getaddrinfo('0.0.0.0', 80): This is a function in Python's socket module takes a host name and port number and returns a list of tuples each containing information  in a format that can be used by the network functions, to bind a socket in our case.
 ###### * 0.0.0.0: This IP address is a special address used to bind the socket to any IP address assigned to the machine (e.g. 192.168.1.5 on Wi-Fi, another number on Ethernet, etc.) This is useful when you want the server to be accessible regardless of which interface the request comes through (e.g. Wi-Fi, Ethernet if available). 
 ###### * 80: This is the default port for HTTP traffic. By specifying port 80, the server is set up to handle HTTP requests, which is typical for a web server.
-###### * [0][-1]: The use of negative indexing in Python, such as -1 in [0][-1], is a feature that allows accessing elements from the end of a list. Here we choose the last element ,[-1], of the first tuple 
+###### * [0][-1]: The use of negative indexing in Python, such as -1 in [0][-1], is a feature that allows accessing elements from the end of a list. Here we choose the last element ,[-1], of the first tuple, [0].
 
 ## Presenting the data and the platform
 
