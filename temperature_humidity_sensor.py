@@ -191,7 +191,7 @@ html_template = """
             }
         };
         setTimeout(() => {
-            setInterval(updateSensorData, 2000);
+            setInterval(updateSensorData, 500);
         }, 3000);
     </script>
 </body>
@@ -232,7 +232,7 @@ else:
 addr = socket.getaddrinfo('0.0.0.0', 80)[0][-1]
 s = socket.socket()
 s.bind(addr)
-s.listen(1)
+s.listen(2)
 
 # Listen for connections
 while True:
