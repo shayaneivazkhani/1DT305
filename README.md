@@ -11,18 +11,22 @@ Apart from buying the materials needed and the time it takes for the delivery an
 Sometimes while studying i feel a bit cold, specially during the winter because of the cold weather in Sweden and this disrupts my workflow/concentration. Most of those times i have come to realize that it has more to do with my eating routines rather than if the room is actually cold. The goal of this project is to make a device that i can just connect whenever i plan sit down to work for couple of hours. This device will repeatedly measure the temprature of the room so i can just click 2 buttons whenever needed on my laptop to get the measurments quickly so that i know for sure if i need to take break and go eat something or is it that the room is too cold and i have to turn on a heater or close the window.
 
 # Materials needed
-I bought the materials needed from [electrokit](https://www.electrokit.com)
 
-| units | Link                                                       | Price (SEK) |
-|-------|------------------------------------------------------------|-------------|
-| 1 | Raspberry Pi Pico WH                                           | 88   |
-| 1 | USB-kabel A-hane - micro B hane 1.8m                           | 32   |
-| 1 | Adafruit Sensirion SHT31-D Temperatur & luftfuktighetssensor   | 184  |
-| 1 | Kopplingsdäck 400 anslutningar                                 | 40   |
-| 1 | Kopplingsdäck 170 anslutningar                                 | 35   |
-| 1 | Labbsladd 20-pin 15cm hane/hane                                | 29   |
+![“›” 2024-07-03 at 14 37 40](https://github.com/shayaneivazkhani/1DT305/assets/105381967/7f2b73b6-3288-4d83-9687-c681199d48a8)
+
+I bought the materials for my project from [electrokit](https://www.electrokit.com)
+
+| units | Link                                                       | Price (SEK) | Reason needed |
+|-------|------------------------------------------------------------|-------------|----------|
+| 1 | Raspberry Pi Pico WH                                           | 88   |  Being able to connect to the Adafruit sensor and recieve data from it to show the temperature and humidity|
+| 1 | USB-kabel A-hane - micro B hane 1.8m                           | 32   |  Power up and program Raspberry Pi Pico WH via computer               |
+| 1 | Adafruit Sensirion SHT31-D Temperatur & luftfuktighetssensor   | 184  |  Measure temperature and humidity               |
+| 1 | Kopplingsdäck 400 anslutningar                                 | 40   |  Connect electrical components without need for soldering               |
+| 1 | Kopplingsdäck 170 anslutningar                                 | 35   |  Connect electrical components without need for soldering                  |
+| 1 | Labbsladd 20-pin 15cm hane/hane                                | 29   |  Electrical conductivity         |
 
 #### total cost: 408 SEK
+
 
 # Step 1 of 2: Putting everything together
 How all the electronics is connected, aside from the usb that connects the Raspberry Pi Pico to the computer: 
@@ -107,10 +111,10 @@ if url == '/':
 ```
 
 ## Transmitting the data / connectivity and the platform
-I did not use any external platform for creating the UI and connecting it to the data recieved by the Pi Pico. I created a local HTTP server on the Pi Pico and when the client connects to it via the URL that is printed out in thonny, the Pi Pico will read values from humidity sensor and then replace that value with named placeholders (`TEMPERATURE_PLACEHOLDER`, `HUMIDITY_PLACEHOLDER`) inside the defined `html_template` and send that html to the client. The html have code that afterwards starts to update the html provided by itself with latest values from the sensor every 2 seconds. I choose 2 seconds because if i also wanted to connect my phone at the same time my laptops browser was connected to it, then one of the browsers would not be able to make requests because of the single threaded server would be busy with handling previous requests. This little adjustment made it possible to serve 2 clients that would both make continous requsts for updated measurments from the server almost at the same time without having to implement a asynchronous server request handler option. 
+I did not use any external platform for creating the UI and connecting it to the data recieved by the Pi Pico. I created a local HTTP server on the Pi Pico and when the client connects to it via the URL that is printed out in thonny, the Pi Pico will read values from humidity sensor and then replace that value with named placeholders (`TEMPERATURE_PLACEHOLDER`, `HUMIDITY_PLACEHOLDER`) inside the defined `html_template` and send that html to the client. The html have code that afterwards starts to update itself with latest values from the sensor every 2 seconds. I choose 2 seconds because if i also wanted to connect my phone at the same time my laptops browser was connected to it, then one of the browsers would not be able to make requests because of the single threaded server would be busy with handling previous requests. This little adjustment made it possible to serve 2 clients that would both make continous requsts for updated measurments from the server almost at the same time without having to implement a asynchronous server request handler option. 
 
 ## Presenting the data
-I used CSS inside `<style>` tag in the `html_template` to style the data/page that the client would see. I also added javascript code so that the client will use short polling to continuosly get the current temprature and humidity of the room from the sensor connected to the Pi Pico without having to refresh the web page.
+I used CSS inside `<style>` tag in the `html_template` to style the data/page that the client would see. I also added javascript code so that the client will use short polling to continuosly get the current temprature and humidity of the room from the sensor connected to the Pi Pico without having to refresh the web page. No database is needed because the webpage always shows the latest measurement data.
 
 <img width="1489" alt="“›” 2024-07-02 at 04 39 10" src="https://github.com/shayaneivazkhani/1DT305/assets/105381967/466a5217-7ffa-432b-ae76-0a9a85cb44a2">
 
