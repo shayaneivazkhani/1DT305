@@ -37,6 +37,7 @@ How all the electronics is connected, aside from the usb that connects the Raspb
 ### Setup and usage (beginner):
 Simplest guide to set up your computer whether you have Mac or Windows is by following this guide [Raspberry Pi Pico W LESSON 1: Write Your First Program for Absolute Beginners](https://www.youtube.com/watch?v=SL4_oU9t8Ss&list=PLGs0VKk2DiYz8js1SJog21cDhkBqyAhC5) and just replacing the code with what i have written in file `temperature_humidity_sensor.py` [here.](https://github.com/shayaneivazkhani/1DT305/blob/main/temperature_humidity_sensor.py)
 But remember to provide your wifi credentials (very important!) in lines 207–208 in file `temperature_humidity_sensor.py` [here](https://github.com/shayaneivazkhani/1DT305/blob/main/temperature_humidity_sensor.py)
+
 ```
 ssid = 'Wifi-name'
 password = 'Wifi-password'
@@ -121,7 +122,10 @@ Most imortant part of setting up the server is following:
 #### Initializing and configuring a WLAN Interface (WiFi Interface) on the Raspberry Pi Pico W, i.e. enabling the Wi-Fi capabilities of the hardware, then start to connect to the wifi router (the access point).
 ##### lines 210–212
 ```
-wlan = network.WLAN(network.STA_IF) ––> Creates a WLAN object that provides various methods we can use to control and manage Wi-Fi connections (a Wifi interface in our case) via the Wi-Fi hardware on the Pi Pico. network.STA_IF: parameter configures the WLAN interface to operate in "Station" mode. Configuringthe WLAN as a station means the device will act as a client that connects to an existing wireless network (similar to how a smartphone or laptop connects to a Wi-Fi network). This is opposed to "Access Point" mode, where the device would create its own Wi-Fi network for other devices to connect to.
+wlan = network.WLAN(network.STA_IF) ––> Creates a WLAN object that provides various methods we can use to control and manage Wi-Fi connections (a Wifi interface in our case) via the Wi-Fi hardware on the Pi Pico.
+                                        network.STA_IF: parameter configures the WLAN interface to operate in "Station" mode. Configuringthe WLAN as a station means the device will act as a client that connects
+                                        to an existing wireless network (similar to how a smartphone or laptop connects to a Wi-Fi network). This is opposed to "Access Point" mode, where the device would create
+                                        its own Wi-Fi network for other devices to connect to.
 wlan.active(True)                   ––> Powers on the WLAN hardware (Wifi hardware) which is necessary for starting searching for and connecting to Wi-Fi networks.
 wlan.connect(ssid, password)        ––> Begins to connect to the specified Wi-Fi network using the provided SSID (network name) and password.
 ```
@@ -131,8 +135,10 @@ wlan.connect(ssid, password)        ––> Begins to connect to the specified W
 ```
 addr = socket.getaddrinfo('0.0.0.0', 80)[0][-1]  ––> *
 s = socket.socket()                              ––> Creates a new socket object. A socket is an TCP/IP endpoint for HTTP communication.
-s.bind(addr)                                     ––> Binds the socket to an address, i.e. assigning a specific IP address and port number to the socket allowing it to listen for incoming HTTP connections for incoming connections on that adress.
-s.listen(1)                                      ––>  Puts the socket into listening mode, waiting for incoming connection requests. The parameter specifies the maximum number of queued connections. In this case, it allows only one connection to be queued while the server is busy handling the current connection.
+s.bind(addr)                                     ––> Binds the socket to an address, i.e. assigning a specific IP address and port number to the socket allowing it to listen for incoming HTTP connections for
+                                                     incoming connections on that adress.
+s.listen(1)                                      ––>  Puts the socket into listening mode, waiting for incoming connection requests. The parameter specifies the maximum number of queued connections.
+                                                      In this case, it allows only one connection to be queued while the server is busy handling the current connection.
 ```
 
 ###### * socket.getaddrinfo('0.0.0.0', 80): This is a function in Python's socket module takes a host name and port number and returns a list of tuples each containing information  in a format that can be used by the network functions, to bind a socket in our case.
@@ -152,7 +158,6 @@ This is how the physical part of the project will look:
 
 This is how the software part of the project will look:
 ![“›” 2024-07-02 at 07 49 06](https://github.com/shayaneivazkhani/1DT305/assets/105381967/a25ce281-f958-453b-84d7-976bcaa29442)
-
 
 #### Future improvements: 
 Adding a OLED screen so that the dynamically assigned IP adress of the server would be available without the need for depending on Thonny and also connecting external power supply via 12V battery that cuts down to 5V via a voltage regulator so that the project would not need a laptop for functioning.
